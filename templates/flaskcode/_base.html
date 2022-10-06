@@ -1,0 +1,112 @@
+{% from "macro_menu.html" import menu, menu_module, menu_page with context %}
+{% import "macro.html" as macros %}
+
+<!doctype html>
+<html{% block html_attrs %} lang="en"{% endblock %}>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <meta name="robots" content="noindex, nofollow" />
+    {% block head %}
+    <title>{{get_web_title()}}</title>
+    {% endblock %}
+    <link rel="shortcut icon" href="{{ url_for('static', filename='img/favicon.ico') }}">
+    {% set theme = get_theme() %}
+    <meta name="theme-color" content="#222" />
+
+    <script type="text/javascript" src="{{ url_for('flaskcode.static', filename='vendor/jquery.min.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for('flaskcode.static', filename='vendor/bootstrap/js/bootstrap.min.js') }}"></script>
+    <link href="{{ url_for('static', filename='css/theme/'+theme+'_bootstrap.min.css') }}" rel="stylesheet">   
+    <link href="{{ url_for('static', filename='css/custom.css') }}" rel="stylesheet">
+    <script src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
+ 
+    {% block page_styles %}{% endblock %}
+
+    <style type="text/css">
+        body { }
+        .table > tbody > tr.collapse > td {
+          background-color: #009fff0d !important;
+        }
+        .tableRowHover tbody tr:not(.tableRowHoverOff):hover td {
+          background-color: #ffff0080 !important;
+        }
+        .loading { position: fixed; left: 45%; top: 50%; background: #00000000; }
+        .table > tbody > tr > td { vertical-align: middle; }
+        
+        .tab-pane {
+          border-left: 1px solid #ddd;
+          border-right: 1px solid #ddd;
+          border-bottom: 1px solid #ddd;
+          border-radius: 0px 0px 5px 5px;
+          padding: 10px;
+        }
+        .btn-toolbar { text-align: center; }​
+        .nav-tabs { margin-bottom: 0; }
+        .navbar-nav li:hover>.dropdown-menu { display: block; }
+        .dropdown-toggle::after { display:none; }
+        .set-left  { text-align: left; }
+        @media (min-width: 768px) {
+          .set-left  { text-align: right; }
+        }
+        textarea {
+          font-family: Courier
+        }
+      </style>
+    
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+        <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+{{ menu() }}
+<body{% block body_attrs %}{% endblock %}>
+    {% block page_body %}
+    <!--
+    <div id="page-preloader" class="page-preloader">
+        <div class="loading-center">
+            <div class="loading-center-absolute">
+                <i class="fa fa-spinner fa-pulse" aria-hidden="true"></i>
+                <br />
+                <i class="fa fa-code" aria-hidden="true"></i> {{ app_title }}
+                <small><em>v{{ app_version }}</em></small>
+            </div>
+        </div>
+    </div>
+    -->
+
+    <div id="wrapper" style="padding-top:0px;">
+
+    <!-- header -->
+    {% include 'flaskcode/_header.html' %}
+    <!-- /header -->
+
+    <div id="page-wrapper">
+        <!-- .container -->
+        <div id="page-container" class="container-fluid">
+            <!-- page-content -->
+            {% block page_content %}{% endblock %}
+            <!-- /page-content -->
+        </div>
+        <!-- /.container -->
+    </div>
+
+    <!-- footer -->
+    {% include 'flaskcode/_footer.html' %}
+    <!-- /footer -->
+    </div>
+    {% endblock %}
+
+    
+    {% block page_scripts %}{% endblock %}
+</body>
+</html>
+
+<script type="text/javascript">
+$(window).on("load resize", function (event) {
+  var $navbar = $(".navbar");
+  var $body = $("body");
+  $body.css("padding-top", $navbar.outerHeight());
+});  
+</script>

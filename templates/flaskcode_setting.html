@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+{% block content %}
+<div>
+  {{ macros.m_button_group([['globalSettingSaveBtn', '설정 저장']])}}
+  {{ macros.m_row_start('5') }}
+  {{ macros.m_row_end() }}
+  <nav>  
+    {{ macros.m_tab_head_start() }}
+      {{ macros.m_tab_head2('normal', '일반', true) }}
+    {{ macros.m_tab_head_end() }}
+  </nav>  
+  <form id='setting' name='setting'>  
+  <div class="tab-content" id="nav-tabContent">
+    {{ macros.m_tab_content_start('normal', true) }}
+      {{ macros.setting_input_text_and_buttons('setting_root', '편집기 로딩 Root 폴더', [['select_setting_root_btn', '경로 선택']], value=arg['setting_root'], desc=None) }}
+
+      {{ macros.setting_buttons([['select_path_app_btn', 'App 폴더 입력'], ['select_path_data_btn', '데이터 폴더 입력']]) }}
+      {{ macros.setting_input_hidden('tmp_path_app', arg['path_app'])}}
+      {{ macros.setting_input_hidden('tmp_path_data', arg['path_data'])}}
+
+      {{ macros.setting_input_textarea('setting_exclude_foldernames', '제외 폴더명', value=arg['setting_exclude_foldernames'], row='3', desc=['파일 트리에서 제외할 폴더.', '구분자 , 또는 엔터']) }}
+      {{ macros.setting_input_textarea('setting_excluded_extensions', '제외 확장자', value=arg['setting_excluded_extensions'], row='3', desc=['파일 트리에서 제외할 파일 확장자.', '구분자 , 또는 엔터']) }}
+    {{ macros.m_tab_content_end() }}   
+    <script type="text/javascript">console.log("{{ arg['path_data'] }}");</script>
+  </div><!--tab-content-->
+  </form>
+</div> <!--전체-->
+
+<script type="text/javascript">
+var package_name = "{{ arg['package_name'] }}";
+var module = "{{ arg['module'] }}";
+var page = "{{ arg['page'] }}";
+
+
+$(document).ready(function(){
+});
+
+$("body").on('click', '#select_setting_root_btn', function(e){
+  e.preventDefault();
+  var path = $('#setting_root').val().trim();
+  if (path == '') path = '/';
+  selectLocalFolder("편집기 Root", path, function(result){
+    $('#setting_root').val(result);
+  });
+});
+
+$("body").on('click', '#select_path_app_btn', function(e){
+  e.preventDefault();
+  $('#setting_root').val($('#tmp_path_app').val());
+});
+
+$("body").on('click', '#select_path_data_btn', function(e){
+  e.preventDefault();
+  $('#setting_root').val($('#tmp_path_data').val());
+});
+
+</script>    
+{% endblock %}
