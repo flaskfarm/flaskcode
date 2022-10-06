@@ -10,16 +10,6 @@ __menu = {
             'uri': 'setting',
             'name': '설정',
         },
-        {
-            'uri': 'manual',
-            'name': '매뉴얼',
-            'list': [
-                {
-                    'uri': 'README.md',
-                    'name': 'README'
-                }
-            ]
-        },
     ]
 }
 
@@ -37,10 +27,13 @@ setting = {
 }
 
 from plugin import *
+
 P = create_plugin_instance(setting)
 
 from framework import F, login_required
+
 from .mod_setting import ModuleSetting
+
 P.set_module_list([ModuleSetting])
 
 

@@ -1,11 +1,14 @@
 # -*- coding: utf-8 -*-
-import os
 import mimetypes
-from flask import render_template, abort, jsonify, send_file, g, request, redirect
-from .utils import write_file, dir_tree, get_file_extension
+import os
+
+from flask import (abort, g, jsonify, redirect, render_template, request,
+                   send_file)
+from framework import F, login_required
 
 from .setup import P
-from framework import F, login_required
+from .utils import dir_tree, get_file_extension, write_file
+
 
 def get_exclude_extensions():
     return P.ModelSetting.get_list('setting_excluded_extensions', ',')
@@ -23,22 +26,21 @@ def index():
         if openfile.startswith(F.config['path_data']):
             openpath = openfile.replace(F.config['path_data'], '')
             g.flaskcode_resource_basepath = F.config['path_data']
-            return redirect(f'/flaskcode/{openpath}')
         elif openfile.startswith(F.config['path_app']):
             openpath = openfile.replace(F.config['path_app'], '')
             P.ModelSetting.set('setting_root', F.config['path_app'])
-            return redirect(f'/flaskcode/{openpath}')
         else:
             os.path.split(openfile)
             openpath = openfile.replace(F.config['path_data'], '')
             g.flaskcode_resource_basepath = F.config['path_data']
+        if openpath.startswith('/'):
+            return redirect(f'/flaskcode{openpath}')
+        else:
             return redirect(f'/flaskcode/{openpath}')
-
-
-
     dirname = os.path.basename(g.flaskcode_resource_basepath)
     dtree = dir_tree(g.flaskcode_resource_basepath, g.flaskcode_resource_basepath + '/', exclude_names=get_exclude_names(), excluded_extensions=get_exclude_extensions(), )
     return render_template('flaskcode/index.html', dirname=dirname, dtree=dtree, file_loading="")
+
 
 @P.blueprint.route('/<path:path>')
 @login_required
