@@ -1,1 +1,1 @@
-This is https://github.com/sujeetkv/flaskcode fork version and is a plugin that has been partially modified to run on Flask Farm
+This is https://github.com/sujeetkv/flaskcode fork version and is a plugin that has been partially modified to run on FlaskFarm
