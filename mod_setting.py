@@ -8,6 +8,7 @@ class ModuleSetting(PluginModuleBase):
         f"{name}_root" : F.config['path_data'],
         f"{name}_exclude_foldernames" : 'mnt, __pycache__, .git, false',
         f"{name}_excluded_extensions" : 'mp4, db, pyo',
+        f"{name}_open_target" : '_self',
     }
 
     def __init__(self, P):

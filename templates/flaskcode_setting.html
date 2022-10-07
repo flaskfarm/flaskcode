@@ -20,6 +20,8 @@
 
       {{ macros.setting_input_textarea('setting_exclude_foldernames', '제외 폴더명', value=arg['setting_exclude_foldernames'], row='3', desc=['파일 트리에서 제외할 폴더.', '구분자 , 또는 엔터']) }}
       {{ macros.setting_input_textarea('setting_excluded_extensions', '제외 확장자', value=arg['setting_excluded_extensions'], row='3', desc=['파일 트리에서 제외할 파일 확장자.', '구분자 , 또는 엔터']) }}
+      {{ macros.setting_radio_with_value('setting_open_target', '편집기에서 열기', [['_self', '현재 창'], ['_blank', '새창']], value=arg['setting_open_target']) }}
+
     {{ macros.m_tab_content_end() }}   
     <script type="text/javascript">console.log("{{ arg['path_data'] }}");</script>
   </div><!--tab-content-->
