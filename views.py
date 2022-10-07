@@ -33,7 +33,7 @@ def index():
             os.path.split(openfile)
             openpath = openfile.replace(F.config['path_data'], '')
             g.flaskcode_resource_basepath = F.config['path_data']
-        if openpath.startswith('/'):
+        if openpath.startswith('/') or openpath.startswith('\\'):
             return redirect(f'/flaskcode{openpath}')
         else:
             return redirect(f'/flaskcode/{openpath}')
