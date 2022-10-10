@@ -1,8 +1,8 @@
 title: "편집기"
 version: "1.0.1"
 package_name: "flaskcode"
-developer: "TEAM"
-description': "flaskcode를 fork한 문서 편집기"
+developer: "sujeetkv"
+description: "flaskcode를 fork한 문서 편집기"
 home: "https://github.com/flaskfarm/flaskcode"
 more: "https://raw.githubusercontent.com/flaskfarm/flaskcode/main/README.md"
 
