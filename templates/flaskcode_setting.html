@@ -41,7 +41,7 @@ $("body").on('click', '#select_setting_root_btn', function(e){
   e.preventDefault();
   var path = $('#setting_root').val().trim();
   if (path == '') path = '/';
-  selectLocalFolder("편집기 Root", path, function(result){
+  globalSelectLocalFolder("편집기 Root", path, function(result){
     $('#setting_root').val(result);
   });
 });
