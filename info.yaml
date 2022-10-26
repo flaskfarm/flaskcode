@@ -5,10 +5,3 @@ developer: "sujeetkv"
 description: "flaskcode를 fork한 문서 편집기"
 home: "https://github.com/flaskfarm/flaskcode"
 more: "https://raw.githubusercontent.com/flaskfarm/flaskcode/main/README.md"
-
-require_plugin:
-require_os: 
-require_running_type: 
-need_decrypt_code: false
-need_filesize_check': false
-filesize: 0
