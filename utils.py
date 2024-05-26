@@ -1,21 +1,14 @@
 # -*- coding: utf-8 -*-
-import os
 import io
-import sys
+import os
 import shutil
 from functools import wraps
-from flask import request, make_response
 
+from flask import make_response, request
 
-PY2 = sys.version_info.major == 2
 DEFAULT_CHUNK_SIZE = 16 * 1024
 
-
-if PY2:
-    string_types = basestring # pylint:disable=undefined-variable
-else:
-    string_types = str
-
+string_types = str
 
 def get_file_extension(filename):
     # return filename.rsplit('.', 1)[1].lower() if '.' in filename else ''
