@@ -22,6 +22,8 @@ def write_file(content, filepath, encoding='utf-8', chunk_size=None):
     success = True
     message = 'File saved successfully'
     if isinstance(content, string_types):
+        if '\r\n' in content:
+            content = '\n'.join(content.splitlines())
         content_io = io.StringIO()
         content_io.write(content)
         with io.open(filepath, 'w', encoding=encoding, newline='\n') as dest:
